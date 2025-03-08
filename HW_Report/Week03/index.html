@@ -1,16 +1,256 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 03</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>閒聊討論區</title>
+  <link rel="stylesheet" href="homepage.css">
 </head>
 
-<body>
-  <!-- TODO -->
+<body class="body">
+  <nav class="navBar">
+    <div class="loginBtn">登入</div>
+  </nav>
+  <div class="container">
+    <div class="categories">
+      <ul style="margin: 0px;">
+        <li><a>分類A</a></li>
+        <li><a>分類B</a></li>
+        <li><a>分類C</a></li>
+        <li><a>分類D</a></li>
+        <li><a>分類E</a></li>
+      </ul>
+    </div>
+    <div class="boards">
+      <div class="board">
+        <h2 class="heading">分類A</h2>
+        <table class="table">
+          <thead>
+            <tr class="tableHeader">
+              <td>主題</td>
+              <td>最後更新時間</td>
+              <td>用戶</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tableRows" >
+              <td class="subject" >主題1</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 1</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題2</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 2</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題3</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 3</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題4</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 4</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題5</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 5</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="seeAll" colspan="3"><a>全部</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="board">
+        <h2 class="heading">分類B</h2>
+        <table class="table">
+          <thead>
+            <tr class="tableHeader">
+              <td>主題</td>
+              <td>最後更新時間</td>
+              <td>用戶</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tableRows" >
+              <td class="subject" >主題1</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 1</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題2</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 2</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題3</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 3</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題4</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 4</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題5</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 5</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="seeAll" colspan="3"><a>全部</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="board">
+        <h2 class="heading">分類C</h2>
+        <table class="table">
+          <thead>
+            <tr class="tableHeader">
+              <td>主題</td>
+              <td>最後更新時間</td>
+              <td>用戶</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tableRows" >
+              <td class="subject" >主題1</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 1</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題2</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 2</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題3</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 3</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題4</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 4</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題5</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 5</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="seeAll" colspan="3"><a>全部</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="board">
+        <h2 class="heading">分類D</h2>
+        <table class="table">
+          <thead>
+            <tr class="tableHeader">
+              <td>主題</td>
+              <td>最後更新時間</td>
+              <td>用戶</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tableRows" >
+              <td class="subject" >主題1</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 1</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題2</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 2</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題3</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 3</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題4</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 4</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題5</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 5</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="seeAll" colspan="3"><a>全部</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="board">
+        <h2 class="heading">分類E</h2>
+        <table class="table">
+          <thead>
+            <tr class="tableHeader">
+              <td>主題</td>
+              <td>最後更新時間</td>
+              <td>用戶</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tableRows" >
+              <td class="subject" >主題1</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 1</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題2</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 2</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題3</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 3</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題4</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 4</td>
+            </tr>
+            <tr class="tableRows" >
+              <td class="subject" >主題5</td>
+              <td class="lastUpdate" >2025-03-01 00:01</td>
+              <td class="username" >User 5</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="seeAll" colspan="3"><a>全部</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
 </body>
+
+<footer class="footer" style="border: solid 1px; padding: 10px;box-sizing: border-box;margin-top: auto;">
+  <p>Copyright© 2025 CSIE5210 Web程式設計與應用 113-2 Group 24. All rights reserved.</p>
+</footer>
 
 </html>
