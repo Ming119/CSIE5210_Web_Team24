@@ -11,12 +11,12 @@ body {
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
-    border: solid 1px;
+    /*border: solid 1px;*/
 }
 
 .categories {
     width: 200px;
-    border: solid 1px;
+    /*border: solid 1px;*/
     padding: 10px 0;
     box-sizing: border-box;
 }
@@ -25,13 +25,13 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    border: solid 1px;
+    /*border: solid 1px;*/
     box-sizing: border-box;
 }
 
 .board {
     flex: 1;
-    border: solid 1px;
+    /*border: solid 1px;*/
     padding: 0 10px;
     box-sizing: border-box;
 }
@@ -40,17 +40,10 @@ body {
     width: 100%;
 }
 
-.headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-}
-
 .post {
     display: flex;
     flex-direction: row;
-    border: solid 1px;
+    /*border: solid 1px;*/
     box-sizing: border-box;
     padding: 0;
 }
@@ -58,7 +51,7 @@ body {
 .subject,
 .lastUpdate,
 .username {
-    border: solid 1px;
+    /*border: solid 1px;*/
     box-sizing: border-box;
 }
 
@@ -73,14 +66,14 @@ body {
 
 .footer {
     box-sizing: border-box;
-    border: solid 1px;
+    /*border: solid 1px;*/
     padding: 10px;
     margin-top: auto;
 }
 
 .navBar {
     box-sizing: border-box;
-    border: solid 1px;
+    /*border: solid 1px;*/
     padding: 10px;
     display: flex;
     align-items: center;
@@ -91,3 +84,19 @@ body {
     margin-left: auto;
     display: flex;
 }
+
+/* Button styling */
+button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }

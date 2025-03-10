@@ -12,7 +12,7 @@
 
 <body class="body">
   <nav class="navBar">
-    <div class="loginBtn"><a href="./login.html">登入</a></div>
+    <div class="loginBtn"><button onclick="handleLogin()">登入</button></div>
   </nav>
   <div class="container">
     <div class="categories">
@@ -64,11 +64,12 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="seeAll" colspan="3"><a>全部</a></td>
+              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(0)">全部</button></td>
             </tr>
           </tfoot>
         </table>
       </div>
+      <hr>
       <div class="board">
         <h2 class="heading">分類B</h2>
         <table class="table">
@@ -108,11 +109,12 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="seeAll" colspan="3"><a>全部</a></td>
+              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(1)">全部</button></td>
             </tr>
           </tfoot>
         </table>
       </div>
+      <hr>
       <div class="board">
         <h2 class="heading">分類C</h2>
         <table class="table">
@@ -152,11 +154,12 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="seeAll" colspan="3"><a>全部</a></td>
+              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(2)">全部</button></td>
             </tr>
           </tfoot>
         </table>
       </div>
+      <hr>
       <div class="board">
         <h2 class="heading">分類D</h2>
         <table class="table">
@@ -196,11 +199,12 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="seeAll" colspan="3"><a>全部</a></td>
+              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(3)">全部</button></td>
             </tr>
           </tfoot>
         </table>
       </div>
+      <hr>
       <div class="board">
         <h2 class="heading">分類E</h2>
         <table class="table">
@@ -240,16 +244,26 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="seeAll" colspan="3"><a>全部</a></td>
+              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(4)">全部</button></td>
             </tr>
           </tfoot>
         </table>
       </div>
     </div>
   </div>
+  <script>
+    function handleLogin() {
+      event.preventDefault();
+      window.location.href = 'login.html';
+    }
+    function goToCategory(index) {
+      event.preventDefault();
+      window.location.href = 'my_topics.html';
+    }
+  </script>
 </body>
 
-<footer class="footer" style="border: solid 1px; padding: 10px;box-sizing: border-box;margin-top: auto;">
+<footer class="footer">
   <p>Copyright© 2025 CSIE5210 Web程式設計與應用 113-2 Group 24. All rights reserved.</p>
 </footer>
 
