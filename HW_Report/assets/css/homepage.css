@@ -40,6 +40,11 @@ body {
     width: 100%;
 }
 
+.tableHeader{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .post {
     display: flex;
     flex-direction: row;
