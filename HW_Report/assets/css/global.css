@@ -1,0 +1,123 @@
+/* Typography */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+/* Forms */
+input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Buttons */
+button {
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px); /* Slight lift effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.darkmode button {
+    background-color: #ffcc00;
+}
+
+.dark-mode button:hover {
+    background-color: #666; /* Slightly lighter gray on hover */
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Dark Mode UI */
+.dark-mode {
+    background-color: #181818;;
+    color: #e0e0e0;
+}
+
+.dark-mode a {
+    color: #1e90ff;
+}
+
+.dark-mode a:hover {
+    color: #87cefa;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Default link color in dark mode */
+.dark-mode a {
+    color: #1e90ff; /* Light blue for readability */
+    text-decoration: none;
+}
+
+/* Hover effect for better user experience */
+.dark-mode a:hover {
+    color: #87cefa; /* Lighter blue on hover */
+    text-decoration: underline;
+}
+
+/* Visited links */
+.dark-mode a:visited {
+    color: #bb86fc; /* Soft purple to distinguish visited links */
+}
+
+/* Active (when clicking) */
+.dark-mode a:active {
+    color: #ffcc00; /* Yellow for temporary interaction feedback */
+}
+
+/* .dark-mode {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+} */
+
+/* Apply consistent transition speed to everything */
+body, .navBar, .board, .categories, .tableHeader, .category {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}

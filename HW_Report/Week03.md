@@ -49,7 +49,7 @@
     - 使用媒體查詢(`@media`)實現不同螢幕尺寸下的適配
     - 在login.css、register.css和my_topics.css中都加入了針對小螢幕(最大寬度480px)的樣式調整
 - **動態分頁功能**：
-    - 使用JavaScript實現了主題列表的分頁功能(my_topic.js)
+    - 使用JavaScript實現了主題列表的分頁功能(my_topics.js)
     - 每頁顯示固定數量(5筆)的主題資料
     - 動態生成分頁按鈕，並添加當前頁面的視覺提示
 - **表單處理**：
@@ -58,6 +58,6 @@
 
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% Register, Login, My Topics HTML & CSS
-- 杜孟聰 25%
+- 杜孟聰 25% Profile Page
 - 邱志偉 25% UI Design, Homepage HTML & CSS
 - 劉晧安 25% Report
