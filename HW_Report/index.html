@@ -13,244 +13,18 @@
 
 <body class="body">
   <nav class="navBar">
-    <button class="loginBtn" onclick="handleLogin()">登入</button><button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
+    <button class="loginBtn" onclick="handleLogin()">登入</button>
+    <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
   </nav>
   
   <div class="container">
     <div class="categories">
-      <ul style="margin: 0px;">
-        <li><a href="./my_topics.html" class="category">分類A</a></li>
-        <li><a href="./my_topics.html" class="category">分類B</a></li>
-        <li><a href="./my_topics.html" class="category">分類C</a></li>
-        <li><a href="./my_topics.html" class="category">分類D</a></li>
-        <li><a href="./my_topics.html" class="category">分類E</a></li>
+      <ul id="categoryList" style="margin: 0px;">
+        <!-- Categories will be generated here -->
       </ul>
     </div>
-    <div class="boards">
-      <div class="board">
-        <h2 class="heading">分類A</h2>
-        <table class="table">
-          <thead>
-            <tr class="tableHeader">
-              <td>主題</td>
-              <td>最後更新時間</td>
-              <td>用戶</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tableRows" >
-              <td class="subject" >主題1</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 1</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題2</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 2</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題3</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 3</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題4</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 4</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題5</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 5</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(0)">全部</button></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <hr>
-      <div class="board">
-        <h2 class="heading">分類B</h2>
-        <table class="table">
-          <thead>
-            <tr class="tableHeader">
-              <td>主題</td>
-              <td>最後更新時間</td>
-              <td>用戶</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tableRows" >
-              <td class="subject" >主題1</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 1</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題2</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 2</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題3</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 3</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題4</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 4</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題5</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 5</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(1)">全部</button></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <hr>
-      <div class="board">
-        <h2 class="heading">分類C</h2>
-        <table class="table">
-          <thead>
-            <tr class="tableHeader">
-              <td>主題</td>
-              <td>最後更新時間</td>
-              <td>用戶</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tableRows" >
-              <td class="subject" >主題1</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 1</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題2</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 2</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題3</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 3</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題4</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 4</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題5</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 5</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(2)">全部</button></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <hr>
-      <div class="board">
-        <h2 class="heading">分類D</h2>
-        <table class="table">
-          <thead>
-            <tr class="tableHeader">
-              <td>主題</td>
-              <td>最後更新時間</td>
-              <td>用戶</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tableRows" >
-              <td class="subject" >主題1</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 1</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題2</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 2</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題3</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 3</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題4</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 4</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題5</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 5</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(3)">全部</button></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <hr>
-      <div class="board">
-        <h2 class="heading">分類E</h2>
-        <table class="table">
-          <thead>
-            <tr class="tableHeader">
-              <td>主題</td>
-              <td>最後更新時間</td>
-              <td>用戶</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tableRows" >
-              <td class="subject" >主題1</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 1</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題2</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 2</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題3</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 3</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題4</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 4</td>
-            </tr>
-            <tr class="tableRows" >
-              <td class="subject" >主題5</td>
-              <td class="lastUpdate" >2025-03-01 00:01</td>
-              <td class="username" >User 5</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="seeAll" colspan="3"><button class="seeAll" onclick="goToCategory(4)">全部</button></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+    <div class="boards" id="boardsContainer">
+      <!-- Boards will be generated here -->
     </div>
   </div>
   <script src="assets/js/darkmode.js"></script>
@@ -270,6 +44,114 @@
       document.body.classList.toggle("dark-mode");
     });
 
+    // Function to create category objects
+    function createCategory(name, topics, createdAt, user) {
+      return {
+        name: name,
+        topics: topics,
+        createdAt: createdAt,
+        user: user
+      };
+    }
+
+    // Define category objects
+    const categories = [];
+    const users = ['User1', 'User2', 'User3', 'User4', 'User5'];
+    const topics = ['主題1', '主題2', '主題3', '主題4', '主題5'];
+    for (let i = 0; i < 5; i++) {
+      categories.push(createCategory(
+        `分類${String.fromCharCode(65 + i)}`,
+        topics,
+        `2025-03-0${i + 1} 00:01`,
+        users[i]
+      ));
+    }
+
+    // Generate categories list
+    const categoryList = document.getElementById('categoryList');
+    categories.forEach((category, index) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = './my_topics.html';
+      a.className = 'category';
+      a.textContent = category.name;
+      li.appendChild(a);
+      categoryList.appendChild(li);
+    });
+
+    // Generate boards
+    const boardsContainer = document.getElementById('boardsContainer');
+    categories.forEach((category, index) => {
+      const boardDiv = document.createElement('div');
+      boardDiv.className = 'board';
+
+      const heading = document.createElement('h2');
+      heading.className = 'heading';
+      heading.textContent = category.name;
+      boardDiv.appendChild(heading);
+
+      const table = document.createElement('table');
+      table.className = 'table';
+
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      headerRow.className = 'tableHeader';
+      ['主題', '最後更新時間', '用戶'].forEach(text => {
+        const th = document.createElement('td');
+        th.textContent = text;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      category.topics.forEach(topic => {
+        const row = document.createElement('tr');
+        row.className = 'tableRows';
+
+        const subjectCell = document.createElement('td');
+        subjectCell.className = 'subject';
+        subjectCell.textContent = topic;
+        row.appendChild(subjectCell);
+
+        const lastUpdateCell = document.createElement('td');
+        lastUpdateCell.className = 'lastUpdate';
+        lastUpdateCell.textContent = '2025-03-01 00:01';
+        row.appendChild(lastUpdateCell);
+
+        const usernameCell = document.createElement('td');
+        usernameCell.className = 'username';
+        usernameCell.textContent = 'User';
+        row.appendChild(usernameCell);
+
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+
+      const tfoot = document.createElement('tfoot');
+      tfoot.className = "tableFooter";
+      const footerRow = document.createElement('tr');
+      const footerCell = document.createElement('td');
+      footerCell.className = 'seeAll';
+      footerCell.colSpan = 3;
+      const seeAllButton = document.createElement('button');
+      seeAllButton.className = 'seeAll';
+      seeAllButton.textContent = '全部';
+      seeAllButton.onclick = () => goToCategory(index);
+      footerCell.appendChild(seeAllButton);
+      footerRow.appendChild(footerCell);
+      tfoot.appendChild(footerRow);
+      table.appendChild(tfoot);
+
+      boardDiv.appendChild(table);
+      boardsContainer.appendChild(boardDiv);
+
+      // Add horizontal line between boards
+      if (index < categories.length - 1) {
+        const hr = document.createElement('hr');
+        boardsContainer.appendChild(hr);
+      }
+    });
   </script>
 </body>
 

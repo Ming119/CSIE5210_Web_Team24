@@ -57,7 +57,7 @@ body {
     flex-direction: column;
     /*border: solid 1px;*/
     box-sizing: border-box;
-    margin-top: 20px;
+    padding: 20px 0px;
     overflow-x: auto; /* Prevents overflow */
 }
 
@@ -70,7 +70,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-width: 100%;
-    margin: 0 20px;
+    padding: 10px 20px;
     color: black;
 }
 
@@ -81,8 +81,12 @@ body {
 
 .table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 8px; /* Adds spacing between rows */
+    border-collapse: collapse;
+}
+
+.tableRows{
+    height: 30px;
+    padding: 0px 10px;
 }
 
 .tableRows:hover {
@@ -96,6 +100,10 @@ body {
     font-weight: bold;
     text-decoration: underline;
     color: black;
+}
+
+.tableFooter{
+    height: 50px;
 }
 
 /* Dark mode table header */
@@ -135,7 +143,7 @@ body {
 .footer {
     box-sizing: border-box;
     /*border: solid 1px;*/
-    padding: 10px;
+    padding: 0px 10px;
     margin-top: auto;
 }
 
