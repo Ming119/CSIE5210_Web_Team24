@@ -20,11 +20,9 @@
   <div class="container">
     <div class="categories">
       <ul id="categoryList" style="margin: 0px;">
-        <!-- Categories will be generated here -->
       </ul>
     </div>
     <div class="boards" id="boardsContainer">
-      <!-- Boards will be generated here -->
     </div>
   </div>
   <script src="assets/js/darkmode.js"></script>
@@ -44,30 +42,52 @@
       document.body.classList.toggle("dark-mode");
     });
 
-    // Function to create category objects
-    function createCategory(name, topics, createdAt, user) {
+    function createCategory(name, topics) {
       return {
         name: name,
-        topics: topics,
+        topics: topics
+      };
+    }
+
+    function createTopic(subject, createdAt, user) {
+      return {
+        subject: subject,
         createdAt: createdAt,
         user: user
       };
     }
 
-    // Define category objects
+    function formatDate(date) {
+      const d = new Date(date);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    function getRandomUser(users) {
+      return users[Math.floor(Math.random() * users.length)];
+    }
+
     const categories = [];
-    const users = ['User1', 'User2', 'User3', 'User4', 'User5'];
-    const topics = ['主題1', '主題2', '主題3', '主題4', '主題5'];
+    const users = ['Alice', 'Bob', 'Charles', 'Dennis', 'Emily'];
     for (let i = 0; i < 5; i++) {
+      const topics = [];
+      for (let j = 0; j < 5; j++) {
+        topics.push(createTopic(
+          `主題${j + 1}`,
+          formatDate(Date.now()),
+          getRandomUser(users)
+        ));
+      }
       categories.push(createCategory(
         `分類${String.fromCharCode(65 + i)}`,
-        topics,
-        `2025-03-0${i + 1} 00:01`,
-        users[i]
+        topics
       ));
     }
 
-    // Generate categories list
     const categoryList = document.getElementById('categoryList');
     categories.forEach((category, index) => {
       const li = document.createElement('li');
@@ -79,7 +99,6 @@
       categoryList.appendChild(li);
     });
 
-    // Generate boards
     const boardsContainer = document.getElementById('boardsContainer');
     categories.forEach((category, index) => {
       const boardDiv = document.createElement('div');
@@ -111,17 +130,17 @@
 
         const subjectCell = document.createElement('td');
         subjectCell.className = 'subject';
-        subjectCell.textContent = topic;
+        subjectCell.textContent = topic.subject; // Access the subject property
         row.appendChild(subjectCell);
 
         const lastUpdateCell = document.createElement('td');
         lastUpdateCell.className = 'lastUpdate';
-        lastUpdateCell.textContent = '2025-03-01 00:01';
+        lastUpdateCell.textContent = topic.createdAt; // Access the createdAt property
         row.appendChild(lastUpdateCell);
 
         const usernameCell = document.createElement('td');
         usernameCell.className = 'username';
-        usernameCell.textContent = 'User';
+        usernameCell.textContent = topic.user; // Access the user property
         row.appendChild(usernameCell);
 
         tbody.appendChild(row);
@@ -146,7 +165,6 @@
       boardDiv.appendChild(table);
       boardsContainer.appendChild(boardDiv);
 
-      // Add horizontal line between boards
       if (index < categories.length - 1) {
         const hr = document.createElement('hr');
         boardsContainer.appendChild(hr);
