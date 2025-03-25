@@ -30,7 +30,7 @@
 
 每週上傳該周最後一次commit的網址，ex: https://github.com/shiunyi71/Web_APP_HW/commit/643101979cd8b6304310b75f85e0f8c8ef9c6b2f
 
-※請加老師及助教的帳號進Collaborator: shiunyi71@gmail.com, annie8528@gmail.com
+※請加老師及助教的帳號進Collaborator: shiunyi71@gmail.com, annie8528@gmail.com, pe.lotoya93@gmail.com
 </details>
 
 # Week05 Report
