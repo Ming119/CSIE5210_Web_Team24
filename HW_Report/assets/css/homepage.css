@@ -155,7 +155,7 @@ body {
     backdrop-filter: blur(10px); /* Glass effect */
     padding: 12px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     gap: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
