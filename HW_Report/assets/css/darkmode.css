@@ -3,6 +3,11 @@
     color: #ffffff;
 }
 
+.dark-mode body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
 /* Default link color in dark mode */
 .dark-mode a {
     color: #1e90ff; /* Light blue for readability */

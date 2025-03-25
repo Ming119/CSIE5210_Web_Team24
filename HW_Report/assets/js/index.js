@@ -6,6 +6,10 @@ function logout() {
 	window.location.href = 'index.html';
 }
 
+function openLoginPage() {
+	window.location.href = 'login.html';
+}
+
 function updateNav() {
 	const userStatus = document.getElementById('userStatus');
 	const currentUser = getCookie('currentUser');

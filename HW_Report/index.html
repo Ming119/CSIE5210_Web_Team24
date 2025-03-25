@@ -7,15 +7,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>閒聊討論區</title>
+  <link id="darkModeStylesheet" rel="stylesheet" href="./assets/css/darkmode.css" disabled>
+  <script>
+    // Immediately check dark mode preference and apply it
+    if (localStorage.getItem("darkMode") === "enabled") {
+      // Add dark mode class to <html> so styles are applied immediately
+      document.documentElement.classList.add("dark-mode");
+      // Enable dark mode stylesheet
+      document.getElementById("darkModeStylesheet").disabled = false;
+    }
+  </script>
   <script src="assets/js/darkmode.js"></script>
   <link rel="stylesheet" href="./assets/css/homepage.css">
-  <link id="darkModeStylesheet" rel="stylesheet" href="./assets/css/darkmode.css" disabled>
 </head>
 
 <body class="body">
   <nav class="navBar">
     <span id="userStatus"></span>
-    <button class="loginBtn" onclick="handleLogin()">登入</button>
+    <button class="loginBtn" onclick="window.location.href = 'login.html';">登入</button>
     <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
   </nav>
   
