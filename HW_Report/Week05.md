@@ -38,7 +38,7 @@
 ## 練習了哪些當週上課的主題
 - **JavaScript**：
     - 物件導向：把類別封裝成一個物件，裡面包含：主題、建立日期、用戶等屬性。
-    - HTML DOM：利用JS把經過運算的類別、主題等等輸出成HTML。
+    - HTML DOM：利用JS把經過運算的類別、主題等等網頁內容輸出成HTML。
     - 事件處理：按下登入、註冊、連結等等按鍵會觸發事件。
     - 陣列：把類別、用戶等等以陣列形式儲存。
     - 時間管理：利用Date來獲取現在時間模擬主題建立時間。
@@ -50,10 +50,10 @@
 
 ## 額外找了與當週上課的主題相關的程式技術
 - **Cookies**：
-    - 環境改變：利用按揵配合Cookies來儲存網頁CSS為日間模式或夜間模式。
+    - 環境改變：利用按揵配合Cookies在本地儲存網頁的顯示環境為日間模式或夜間模式。
 
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% Register, Login, My Topics HTML & CSS
 - 杜孟聰 25% Dark Mode Integration, New Post Page (AutoDraft, LivePreview)
-- 邱志偉 25% Homepage: HTML, CSS, JacaScript
+- 邱志偉 25% Homepage, Login Countdown: HTML, CSS, JavaScript
 - 劉晧安 25% Report

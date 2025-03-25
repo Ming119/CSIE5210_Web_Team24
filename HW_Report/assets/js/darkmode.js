@@ -24,7 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // Enable or disable the dark stylesheet
         darkModeStylesheet.disabled = !isDark;
 
-        // Save preference
-        localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
-    });
+        // Handle toggle button click
+        darkModeToggle.addEventListener("click", () => {
+            const isDark = body.classList.toggle("dark-mode");
+            darkModeStylesheet.disabled = !isDark;
+            localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+            darkModeToggle.innerHTML = isDark ? "☀️ 日間模式" : "🌙 夜間模式";
+        });
+    }
 });

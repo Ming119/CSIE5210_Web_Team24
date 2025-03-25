@@ -147,6 +147,40 @@ body {
     margin-top: auto;
 }
 
+<<<<<<< HEAD
+=======
+.navBar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(70, 164, 223, 0.9); /* Semi-transparent */
+    backdrop-filter: blur(10px); /* Glass effect */
+    padding: 12px 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    /* transition: box-shadow 0.3s ease; */
+}
+
+/* Dark Mode Navbar */
+.dark-mode .navBar {
+    background-color: rgba(19, 50, 129, 0.9);
+    backdrop-filter: blur(10px);
+    /* box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); */
+}
+
+
+.loginBtn {
+    /* box-sizing: border-box; */
+    margin-left: auto;
+    font-size: 1rem;
+    /* display: flex; */
+    border-radius: 4px;
+}
+
+>>>>>>> b0f456c8d52696a26c83e3aabd696f5aa2c6171f
 /* Button styling */
 button {
     padding: 5px 10px;
