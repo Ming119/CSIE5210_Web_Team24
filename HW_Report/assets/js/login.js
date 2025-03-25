@@ -8,7 +8,12 @@ function handleLogin(event) {
 	const password = document.getElementById('password').value;
 	
 	if (username && password) {
+		if (password !== "12345678") {
+			alert('密碼錯誤');
+			return;
+		}
 		setCookie('currentUser', username, 7);
+		
 		window.location.href = 'index.html';
 	} else {
 		alert('請輸入用戶名和密碼');
