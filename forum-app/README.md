@@ -17,6 +17,7 @@ forum-app/
 │   │   │   ├── my_topics.css
 │   │   │   └── register.css
 │   ├── components/
+│   │   └── DarkModeToggle.js
 │   ├── context/
 │   │   └── DarkModeContext.js
 │   ├── pages/
@@ -61,18 +62,3 @@ npm start
 ```bash
 npm install react-router-dom
 ```
-
-## 從HTML轉換為React的主要變更
-
-1. 使用React Router進行頁面路由
-2. 創建共享狀態管理（如深色模式）
-3. 將代碼拆分為可重用的組件
-4. 使用React Hooks管理狀態和副作用
-5. 使用JSX替代傳統HTML
-
-## 未來改進方向
-
-- 添加Redux或Context API進行更複雜的狀態管理
-- 添加用戶認證功能
-- 連接後端API
-- 實現更多互動功能
