@@ -58,10 +58,6 @@
 
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% Register, Login, My Topics HTML & CSS
-<<<<<<< HEAD
-- 杜孟聰 25% Profile Page
-=======
-- 杜孟聰 25% 不知道
->>>>>>> f64ce700515c03b96bde0e1c3df73e047fd3f3f2
+- 杜孟聰 25% Profile Page, UI Integration
 - 邱志偉 25% UI Design, Homepage HTML & CSS
 - 劉晧安 25% Report
