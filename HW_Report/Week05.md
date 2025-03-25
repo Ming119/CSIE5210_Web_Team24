@@ -55,5 +55,5 @@
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% Register, Login, My Topics HTML & CSS
 - 杜孟聰 25% Profile Page, UI Integration
-- 邱志偉 25% Homepage: HTML, CSS, JavaScript
+- 邱志偉 25% Homepage, Login Countdown: HTML, CSS, JavaScript
 - 劉晧安 25% Report
