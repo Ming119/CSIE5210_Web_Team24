@@ -147,15 +147,6 @@ body {
     margin-top: auto;
 }
 
-
-.loginBtn {
-    /* box-sizing: border-box; */
-    margin-left: auto;
-    font-size: 1rem;
-    /* display: flex; */
-    border-radius: 4px;
-}
-
 /* Button styling */
 button {
     padding: 5px 10px;

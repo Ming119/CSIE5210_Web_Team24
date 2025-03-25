@@ -111,6 +111,17 @@ input, textarea, select {
     /* box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); */
 }
 
+.loginBtn {
+    /* box-sizing: border-box; */
+    margin-left: auto;
+    font-size: 1rem;
+    /* display: flex; */
+    border-radius: 4px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
 
 /* .dark-mode {
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
