@@ -13,7 +13,7 @@
 
 <body class="body">
   <nav class="navBar">
-    <button class="loginBtn" onclick="handleLogin()">登入</button>
+    <span id="userStatus"></span>
     <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
   </nav>
   
@@ -25,13 +25,9 @@
     <div class="boards" id="boardsContainer">
     </div>
   </div>
+  <script type="module" src="assets/js/index.js"></script>
   <script src="assets/js/darkmode.js"></script>
   <script>
-    function handleLogin() {
-      event.preventDefault();
-      window.location.href = 'login.html';
-    }
-
     function goToCategory(index) {
       event.preventDefault();
       window.location.href = 'my_topics.html';

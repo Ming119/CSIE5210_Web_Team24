@@ -12,7 +12,7 @@
   <div>
     <h1>會員登入</h1>
 
-    <form id="loginForm" onsubmit="handleLogin(event)">
+    <form id="loginForm">
       <div>
         <label for="username">Username</label>
         <input type="text" id="username" name="username">
@@ -28,12 +28,8 @@
 
     <a href="register.html">還沒有帳號？按這裡註冊</a>
   </div>
-  <script>
-    function handleLogin(event) {
-      event.preventDefault();
-      window.location.href = 'index.html';
-    }
-  </script>
+  
+  <script type="module" src="assets/js/login.js"></script>
   <script src="assets/js/darkmode.js"></script>
 </body>
 </html>
