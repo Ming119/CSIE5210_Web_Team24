@@ -51,10 +51,11 @@ label {
 .dark-mode div {
   background-color: #1e1e1e;
   box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+  color: #ccc;
 }
 
 .dark-mode h1 {
-  color: #ccc;
+  color: inherit;
 }
 
 .dark-mode label {

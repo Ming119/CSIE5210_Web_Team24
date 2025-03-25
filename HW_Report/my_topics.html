@@ -5,10 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Topics</title>
+  <link id="darkModeStylesheet" rel="stylesheet" href="./assets/css/darkmode.css" disabled>
+  <script src="assets/js/darkmode.js"></script>
   <link rel="stylesheet" href="assets/css/my_topics.css">
 </head>
 
 <body>
+  <nav class="navBar">
+    <span id="userStatus"></span>
+    <button class="loginBtn" onclick="window.location.href = 'login.html';">登入</button>
+    <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
+  </nav>
   <div>
     <h1>My Topics</h1>
     <table id="topicsTable">
