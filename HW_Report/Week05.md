@@ -49,8 +49,8 @@
     - useState：儲存及處理網頁中的各種狀態。
 
 ## 額外找了與當週上課的主題相關的程式技術
-- **JavaScript**：
-    - 環境改變：利用按揵來改變網頁的CSS為正常模式或晚間模式。
+- **Cookies**：
+    - 環境改變：利用按揵配合Cookies來儲存網頁CSS為日間模式或夜間模式。
 
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% Register, Login, My Topics HTML & CSS

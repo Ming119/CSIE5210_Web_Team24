@@ -33,11 +33,6 @@
       window.location.href = 'my_topics.html';
     }
 
-    document.getElementById("darkModeToggle").addEventListener("click", () => {
-      document.getElementById("darkModeStylesheet").disabled = false;
-      document.body.classList.toggle("dark-mode");
-    });
-
     function createCategory(name, topics) {
       return {
         name: name,
