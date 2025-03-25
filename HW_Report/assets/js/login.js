@@ -8,7 +8,7 @@ function handleLogin(event) {
 	const password = document.getElementById('password').value;
 	
 	if (username && password) {
-		if (password !== "12345678") {
+		if (username !== "test" && password !== "test") {
 			alert('密碼錯誤');
 			return;
 		}
