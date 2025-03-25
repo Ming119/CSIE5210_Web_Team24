@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     const darkModeToggle = document.getElementById("darkModeToggle");
     const body = document.body;
-
-    // Check if dark mode was previously enabled
+    const darkModeStylesheet = document.getElementById("darkModeStylesheet");
+    
+    // Apply previously saved dark mode preference
     if (localStorage.getItem("darkMode") === "enabled") {
         body.classList.add("dark-mode");
-        darkModeToggle.checked = true; // Set toggle switch to "ON"
+        darkModeStylesheet.disabled = false;
     }
+    
+    // Handle toggle button click
+    darkModeToggle.addEventListener("click", () => {
+        const isDark = body.classList.toggle("dark-mode");
+        // Enable or disable the dark stylesheet
+        darkModeStylesheet.disabled = !isDark;
 
-    // Toggle dark mode when switch is clicked
-    darkModeToggle.addEventListener("change", () => {
-        if (darkModeToggle.checked) {
-            body.classList.add("dark-mode");
-            localStorage.setItem("darkMode", "enabled");
-        } else {
-            body.classList.remove("dark-mode");
-            localStorage.setItem("darkMode", "disabled");
-        }
+        // Save preference
+        localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
     });
 });

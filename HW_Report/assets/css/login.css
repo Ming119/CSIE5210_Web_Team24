@@ -40,6 +40,7 @@ label {
 }
 
 /* Responsive design */
+/* When the screen is less than 480 wide */
 @media (max-width: 480px) {
   div {
     margin: 1rem;
