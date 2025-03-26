@@ -1,0 +1,201 @@
+@import url("global.css");
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.login-page.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.login-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.dark-mode .login-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.dark-mode label {
+  color: #e0e0e0;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  transition: border-color 0.3s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.dark-mode input {
+  background-color: #333;
+  color: #fff;
+  border-color: #444;
+}
+
+.dark-mode input:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode button[type="submit"] {
+  background-color: #112282;
+}
+
+.dark-mode button[type="submit"]:hover {
+  background-color: #223395;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+  transition: font-size 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 90%;
+  }
+
+  button {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .login-container {
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.75rem;
+  }
+
+  .register-link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  input, button {
+    padding: 0.6rem;
+  }
+
+  form {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-height: 600px) {
+  form {
+    gap: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.25rem;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .login-container {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (max-height: 500px) {
+  .login-page {
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  form {
+    gap: 0.75rem;
+  }
+}
