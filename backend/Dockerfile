@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir /app
 COPY app /app/
-WORKDIR   /app
+WORKDIR  /app
 
 EXPOSE 8000
 
