@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Post - 閒聊討論區</title>
+  <!-- Dark mode stylesheet -->
+  <link id="darkModeStylesheet" rel="stylesheet" href="{% static 'css/darkmode.css' %}" disabled>
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+  <!-- Add Post specific styles -->
+  <link rel="stylesheet" href="{% static 'css/new_post.css' %}">
+  <!-- Dark mode script -->
+  <script src="{% static 'js/darkmode.js' %}"></script>
+</head>
+<body class="body">
+    <nav class="navBar">
+        <span id="userStatus"></span>
+        <!-- <button class="loginBtn" onclick="window.location.href = 'login.html';">登入</button> -->
+        <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
+    </nav>
+  
+  <div class="container" style="justify-content: center; padding: 2rem;">
+    <!-- Using "board" to inherit dark mode styling -->
+    <div class="board postFormContainer">
+      <h1>新增貼文</h1>
+      <form id="postForm">
+        <div class="form-group">
+          <label for="postTitle">貼文名稱</label>
+          <input type="text" id="postTitle" name="postTitle" placeholder="Enter title here" required>
+        </div>
+        <div class="form-group">
+          <label for="postContent">內容</label>
+          <textarea id="postContent" name="postContent" rows="10" placeholder="Write your post here..." required></textarea>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <input type="checkbox" id="togglePreview">
+            <label for="togglePreview">即時預覽</label>
+          </div>
+        <div id="livePreview" class="live-preview">
+          <h2 id="previewTitle"></h2>
+          <p id="previewContent"></p>
+        </div>
+        <div id="draftStatus" class="draft-status">草稿尚未儲存。</div>
+        <div class="form-actions">
+          <button type="submit">發布貼文</button>
+          <button type="button" id="manualDraftBtn">儲存草稿</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    // Elements for autodraft feature
+    const postTitle = document.getElementById('postTitle');
+    const postContent = document.getElementById('postContent');
+    const draftStatus = document.getElementById('draftStatus');
+    const manualDraftBtn = document.getElementById('manualDraftBtn');
+    const DRAFT_KEY = 'postDraft';
+    
+    // Elements for live preview
+    const togglePreview = document.getElementById('togglePreview');
+    const livePreview = document.getElementById('livePreview');
+    const previewTitle = document.getElementById('previewTitle');
+    const previewContent = document.getElementById('previewContent');
+    
+    // Load saved draft from localStorage
+    function loadDraft() {
+      const savedDraft = localStorage.getItem(DRAFT_KEY);
+      if (savedDraft) {
+        const draft = JSON.parse(savedDraft);
+        if (draft.title) postTitle.value = draft.title;
+        if (draft.content) postContent.value = draft.content;
+        draftStatus.textContent = "Draft loaded (last saved at " + new Date(draft.timestamp).toLocaleTimeString() + ")";
+        updatePreview();
+      }
+    }
+    
+    // Save the current post (title and content) as a draft
+    function saveDraft() {
+      const draft = {
+        title: postTitle.value,
+        content: postContent.value,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      draftStatus.textContent = "Draft saved at " + new Date(draft.timestamp).toLocaleTimeString();
+    }
+    
+    // Update live preview if enabled
+    function updatePreview() {
+      previewTitle.textContent = postTitle.value;
+      previewContent.textContent = postContent.value;
+    }
+    
+    togglePreview.addEventListener('change', () => {
+      if (togglePreview.checked) {
+        livePreview.style.display = 'block';
+        updatePreview();
+      } else {
+        livePreview.style.display = 'none';
+      }
+    });
+    
+    postTitle.addEventListener('input', () => { if (togglePreview.checked) updatePreview(); });
+    postContent.addEventListener('input', () => { if (togglePreview.checked) updatePreview(); });
+    
+    // Auto-save draft every 5 seconds
+    const autoSaveInterval = setInterval(saveDraft, 5000);
+    
+    manualDraftBtn.addEventListener('click', saveDraft);
+    
+    // Handle form submission
+    document.getElementById('postForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Normally, send the post data to the server here.
+      alert('Post published!');
+      localStorage.removeItem(DRAFT_KEY);
+      draftStatus.textContent = "Draft cleared.";
+      postTitle.value = '';
+      postContent.value = '';
+      if (togglePreview.checked) updatePreview();
+    });
+    
+    window.addEventListener('DOMContentLoaded', loadDraft);
+  </script>
+  <script type="module" src="{% static 'js/index.js' %}"></script>
+</body>
+<footer class="footer">
+  <p>Copyright© 2025 CSIE5210 Web程式設計與應用 113-2 Group 24. All rights reserved.</p>
+</footer>
+</html>

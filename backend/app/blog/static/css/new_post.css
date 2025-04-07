@@ -1,0 +1,71 @@
+/* @import url("global.css"); */
+
+/* Additional styling for the post form container */
+.postFormContainer {
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Input and textarea styling */
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Live preview area */
+  .live-preview {
+    display: none;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+  }
+  
+  /* Draft status message */
+  .draft-status {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: gray;
+  }
+  
+  /* Form actions (buttons) styling */
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Dark mode adjustments */
+  .dark-mode .postFormContainer {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+  }
+  
+  .dark-mode .form-group input,
+  .dark-mode .form-group textarea {
+    background-color: #2b2b2b;
+    color: #f1f1f1;
+    border: 1px solid #555;
+  }
+  
+  .dark-mode .live-preview {
+    border-color: #555;
+  }
+  

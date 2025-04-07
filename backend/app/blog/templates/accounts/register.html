@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>註冊</title>
+  <link id="darkModeStylesheet" rel="stylesheet" href="{% static 'css/darkmode.css' %}" disabled>
+  <script src="{% static 'js/darkmode.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>註冊</h1>
+    
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">註冊</button>
+    </form>
+    
+    <a href="/login">已經有帳號了？按這裡登入</a>
+  </div>
+  
+  <script src="{% static 'js/darkmode.js' %}"></script>
+</body>
+</html>
