@@ -40,27 +40,7 @@
 - 映像檔
 - 創建與管理
 - Docker Compose
-### Django
-- 安裝：Python, Visual Studio Code, Django
-- 產生框架
-- 安裝套件
-- 建立資料庫
-- 修改：Model, View, Template
-- 網址架構
-- 調整Admin管理頁面
-- 使用者管理
 
-## 額外找了與當週上課的主題相關的程式技術
-### 其他伺服器
-- 
-
-## 組員分工情況 (共100%)，Group 24
-- 李浩銘 25% 實作Django及Docker
-- 杜孟聰 25% 
-- 邱志偉 25% Report
-- 劉晧安 25%
-
-## Docker
 ### Docker Image Pull 連結
 https://hub.docker.com/r/ming119/web_team24
 
@@ -77,3 +57,23 @@ docker compose up -d
 ```
 
 Now the web is hosted on localhost:8000
+
+### Django
+- 安裝：Python, Visual Studio Code, Django
+- 產生框架
+- 安裝套件
+- 建立資料庫：SQLite3
+- 修改：Model, View, Template
+- 網址架構：Home, Register, Login, Logout
+- 調整Admin管理頁面
+- 使用者管理
+
+## 額外找了與當週上課的主題相關的程式技術
+### 資料庫
+- SQLite3
+
+## 組員分工情況 (共100%)，Group 24
+- 李浩銘 25% 實作Django及Docker
+- 杜孟聰 25% 不知道
+- 邱志偉 25% Report
+- 劉晧安 25% 不知道
