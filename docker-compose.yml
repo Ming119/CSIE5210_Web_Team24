@@ -1,6 +1,7 @@
 services:
   django:
     build: ./backend
+    image: ming119/web_team24
     hostname: django
     container_name: django
     ports:
