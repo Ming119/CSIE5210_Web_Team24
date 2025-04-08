@@ -4,22 +4,25 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Post
-from .forms import RegisterForm
 
 def index_view(request):
   return render(request, 'index.html')
 
 def register_view(request):
   if request.method == 'POST':
-    form = RegisterForm(request.POST)
-    if form.is_valid():
-      username = form.cleaned_data.get('username')
-      password = form.cleaned_data.get('password1')
-      user = User.objects.create_user(username=username, password=password)
-      login(request, user)
-      return redirect('index')
-  form = RegisterForm()
-  return render(request, 'accounts/register.html', {'form': form})
+    # form = UserCreationForm(request.POST)
+    # if form.is_valid():
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    confirm_password = request.POST.get('confirm_password')
+    if password != confirm_password:
+      return render(request, 'accounts/register.html', {'error': '密碼不一致'})
+    if User.objects.filter(username=username).exists():
+      return render(request, 'accounts/register.html', {'error': '使用者名稱已存在'})
+    user = User.objects.create_user(username=username, password=password)
+    login(request, user)
+    return redirect('login')
+  return render(request, 'accounts/register.html')
 
 def login_view(request):
   if request.method == 'POST':
@@ -31,12 +34,12 @@ def login_view(request):
       next_url = request.POST.get('next') or request.GET.get('next') or 'index'
       return redirect(next_url)
     else:
-      return render(request, 'accounts/login.html', {'error': 'Invalid credentials'})
+      return render(request, 'accounts/login.html', {'error': '使用者名稱或密碼錯誤'})
   return render(request, 'accounts/login.html')
 
 def logout_view(request):
-  if request.method == 'POST':
-    logout(request)
+  # if request.method == 'POST':
+  logout(request)
   return redirect('index')
 
 

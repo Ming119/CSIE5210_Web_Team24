@@ -1,26 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+{% endblock %}
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>閒聊討論區</title>
-  <link id="darkModeStylesheet" rel="stylesheet" href="{% static 'css/darkmode.css' %}" disabled>
-  <script src="{% static 'js/darkmode.js' %}"></script>
-  <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-</head>
-
-<body class="body">
-  <nav class="navBar">
-    <span id="userStatus"></span>
-    <!-- <button class="loginBtn" onclick="window.location.href = 'login.html';">登入</button> -->
-    <button class="button" onclick="window.location.href = 'posts/new/';">新增貼文</button>
-    <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
-  </nav>
-  
+{% block content %}
   <div class="container">
     <div class="categories">
       <ul id="categoryList" style="margin: 0px;">
@@ -29,7 +14,7 @@
     <div class="boards" id="boardsContainer">
     </div>
   </div>
-  <script type="module" src="{% static 'js/index.js' %}"></script>
+  
   <script>
     function goToCategory(index) {
       event.preventDefault();
@@ -165,10 +150,5 @@
       }
     });
   </script>
-</body>
 
-<footer class="footer">
-  <p>Copyright© 2025 CSIE5210 Web程式設計與應用 113-2 Group 24. All rights reserved.</p>
-</footer>
-
-</html>
+{% endblock %}

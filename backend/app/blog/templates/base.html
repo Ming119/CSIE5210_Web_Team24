@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}閒聊討論區{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <script src="{% static 'js/darkmode.js' %}"></script>
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body>
+  <nav>
+    <div class="logo-container">
+      <!-- <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Logo" class="logo"></a> -->
+      <h1><a href="{% url 'index' %}">閒聊討論區</a></h1>
+    </div>
+    
+    <div class="nav-links">
+      <!-- <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button> -->
+      {% if user.is_authenticated %}
+        歡迎，{{ user.username }}!
+        <button class="button" onclick="window.location.href='posts/new/';">新增貼文</button>
+        <button class="button" onclick="window.location.href='{% url 'logout' %}';">登出</button>
+      {% else %}
+        <button class="button" onclick="window.location.href='{% url 'login' %}';">登入</button>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>Copyright© 2025 CSIE5210 Web程式設計與應用 113-2 Group 24. All rights reserved.</p>
+  </footer>
+</body>
+</html>
