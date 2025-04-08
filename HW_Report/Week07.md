@@ -66,12 +66,14 @@ https://hub.docker.com/r/ming119/web_team24
 
 ### Docker啟動方式說明
 ```bash
-# Run with 
+# Run with docker pull
 docker pull ming119/web_team24:latest
-docker run -p 8000:8000 ming119/web_team24:latest -d
+docker run -p 8000:8000 -d ming119/web_team24:latest
 ```
 
 ```bash
 # build form source
 docker compose up -d
 ```
+
+Now the web is hosted on localhost:8000
