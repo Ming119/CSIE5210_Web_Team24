@@ -125,8 +125,8 @@ body {
 }
 
 .subject,
-.lastUpdate,
-.username {
+.lastUpdate
+{
     /*border: solid 1px;*/
     box-sizing: border-box;
 }
@@ -135,20 +135,11 @@ body {
     flex: 1;
 }
 
-.lastUpdate,
-.username {
+.lastUpdate
+{
     width: 150px;
 }
 
-.footer {
-    box-sizing: border-box;
-    /*border: solid 1px;*/
-    padding: 0px 10px;
-    margin-top: auto;
-}
-
-<<<<<<< HEAD
-=======
 .navBar {
     position: sticky;
     top: 0;
@@ -171,16 +162,6 @@ body {
     /* box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); */
 }
 
-
-.loginBtn {
-    /* box-sizing: border-box; */
-    margin-left: auto;
-    font-size: 1rem;
-    /* display: flex; */
-    border-radius: 4px;
-}
-
->>>>>>> b0f456c8d52696a26c83e3aabd696f5aa2c6171f
 /* Button styling */
 button {
     padding: 5px 10px;
@@ -195,6 +176,7 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
 .dark-mode button {
     background-color: #112282; /* Darker button */
     color: #f0f0f0;
