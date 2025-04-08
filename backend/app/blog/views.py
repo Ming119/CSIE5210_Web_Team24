@@ -1,12 +1,24 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Post
+from .models import Category, Post
+from .forms import PostForm
 
 def index_view(request):
-  return render(request, 'index.html')
+  categories = Category.objects.all()
+  category_slug = request.GET.get('category')
+  if category_slug:
+    posts = Post.objects.filter(category__slug=category_slug)
+  else:
+    posts = Post.objects.all()
+
+  context = {
+    'categories': categories,
+    'posts': posts,
+  }
+  
+  return render(request, 'index.html', context)
 
 def register_view(request):
   if request.method == 'POST':
@@ -21,7 +33,7 @@ def register_view(request):
       return render(request, 'accounts/register.html', {'error': '使用者名稱已存在'})
     user = User.objects.create_user(username=username, password=password)
     login(request, user)
-    return redirect('login')
+    return redirect('index')
   return render(request, 'accounts/register.html')
 
 def login_view(request):
@@ -42,21 +54,16 @@ def logout_view(request):
   logout(request)
   return redirect('index')
 
-
-
-# TODO
-# Post Detail
-def post_detail(request, pk):
-  post = get_object_or_404(Post, pk=pk)
-  return render(request, 'post_detail.html', {'post': post})
-
-# Create Post (requires login)
 @login_required
-def post_create(request):
+def create_post(request):
   if request.method == 'POST':
-    title = request.POST.get('title')
-    content = request.POST.get('content')
-    post = Post(title=title, content=content, author=request.user)
-    post.save()
-    return redirect('post_list')
-  return render(request, 'new_post.html')
+    form = PostForm(request.POST)
+    if form.is_valid():
+      post = form.save(commit=False)
+      post.author = request.user  # Set the author to the current user
+      post.save()
+      return redirect('index')  # Redirect to the blog index page after saving
+  else:
+    form = PostForm()
+  
+  return render(request, 'create_post.html', {'form': form})
