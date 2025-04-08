@@ -2,153 +2,55 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <div class="categories">
-      <ul id="categoryList" style="margin: 0px;">
-      </ul>
+<div class="container my-4">
+  <div class="row">
+    <!-- Categories Sidebar (Left) -->
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">分類</h5>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" id="categoryList">
+            <li class="list-group-item">
+              <a href="{% url 'index' %}" class="text-decoration-none">全部</a>
+            </li>
+            {% for category in categories %}
+              <li class="list-group-item">
+                <a href="{% url 'index' %}?category={{ category.slug }}" class="text-decoration-none">{{ category.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="boards" id="boardsContainer">
+
+    <!-- Posts Section (Right) -->
+    <div class="col-md-9">
+      <div class="boards" id="boardsContainer">
+        {% for post in posts %}
+          <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="#" class="text-decoration-none text-dark">{{ post.title }}</a>
+              </h5>
+              <p class="card-text text-muted">作者: {{ post.author.username }} | 日期: {{ post.created_at|date:"Y-m-d" }}</p>
+              <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+              {% if post.category %}
+                <span class="badge bg-primary">{{ post.category.name }}</span>
+              {% else %}
+                <span class="badge bg-secondary">未分類</span>
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+          <p class="text-muted">目前沒有貼文。</p>
+        {% endfor %}
+      </div>
     </div>
   </div>
-  
-  <script>
-    function goToCategory(index) {
-      event.preventDefault();
-      window.location.href = 'my_topics.html';
-    }
-
-    function createCategory(name, topics) {
-      return {
-        name: name,
-        topics: topics
-      };
-    }
-
-    function createTopic(subject, createdAt, user) {
-      return {
-        subject: subject,
-        createdAt: createdAt,
-        user: user
-      };
-    }
-
-    function formatDate(date) {
-      const d = new Date(date);
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      const hours = String(d.getHours()).padStart(2, '0');
-      const minutes = String(d.getMinutes()).padStart(2, '0');
-      return `${year}-${month}-${day} ${hours}:${minutes}`;
-    }
-
-    function getRandomUser(users) {
-      return users[Math.floor(Math.random() * users.length)];
-    }
-
-    const categories = [];
-    const users = ['Alice', 'Bob', 'Charles', 'Dennis', 'Emily'];
-    for (let i = 0; i < 5; i++) {
-      const topics = [];
-      for (let j = 0; j < 5; j++) {
-        topics.push(createTopic(
-          `主題${j + 1}`,
-          formatDate(Date.now()),
-          getRandomUser(users)
-        ));
-      }
-      categories.push(createCategory(
-        `分類${String.fromCharCode(65 + i)}`,
-        topics
-      ));
-    }
-
-    const categoryList = document.getElementById('categoryList');
-    categories.forEach((category, index) => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = './my_topics.html';
-      a.className = 'category';
-      a.textContent = category.name;
-      li.appendChild(a);
-      categoryList.appendChild(li);
-    });
-
-    const boardsContainer = document.getElementById('boardsContainer');
-    categories.forEach((category, index) => {
-      const boardDiv = document.createElement('div');
-      boardDiv.className = 'board';
-
-      const heading = document.createElement('h2');
-      heading.className = 'heading';
-      heading.textContent = category.name;
-      boardDiv.appendChild(heading);
-
-      const table = document.createElement('table');
-      table.className = 'table';
-
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
-      headerRow.className = 'tableHeader';
-      ['主題', '最後更新時間', '用戶'].forEach(text => {
-        const th = document.createElement('td');
-        th.textContent = text;
-        headerRow.appendChild(th);
-      });
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
-
-      const tbody = document.createElement('tbody');
-      category.topics.forEach(topic => {
-        const row = document.createElement('tr');
-        row.className = 'tableRows';
-
-        const subjectCell = document.createElement('td');
-        subjectCell.className = 'subject';
-        subjectCell.textContent = topic.subject; // Access the subject property
-        row.appendChild(subjectCell);
-
-        const lastUpdateCell = document.createElement('td');
-        lastUpdateCell.className = 'lastUpdate';
-        lastUpdateCell.textContent = topic.createdAt; // Access the createdAt property
-        row.appendChild(lastUpdateCell);
-
-        const usernameCell = document.createElement('td');
-        usernameCell.className = 'username';
-        usernameCell.textContent = topic.user; // Access the user property
-        row.appendChild(usernameCell);
-
-        tbody.appendChild(row);
-      });
-      table.appendChild(tbody);
-
-      const tfoot = document.createElement('tfoot');
-      tfoot.className = "tableFooter";
-      const footerRow = document.createElement('tr');
-      const footerCell = document.createElement('td');
-      footerCell.className = 'seeAll';
-      footerCell.colSpan = 3;
-      const seeAllButton = document.createElement('button');
-      seeAllButton.className = 'seeAll';
-      seeAllButton.textContent = '全部';
-      seeAllButton.onclick = () => goToCategory(index);
-      footerCell.appendChild(seeAllButton);
-      footerRow.appendChild(footerCell);
-      tfoot.appendChild(footerRow);
-      table.appendChild(tfoot);
-
-      boardDiv.appendChild(table);
-      boardsContainer.appendChild(boardDiv);
-
-      if (index < categories.length - 1) {
-        const hr = document.createElement('hr');
-        boardsContainer.appendChild(hr);
-      }
-    });
-  </script>
-
+</div>
 {% endblock %}
