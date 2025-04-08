@@ -2,7 +2,6 @@ const rowsPerPage = 5;
 let currentPage = 1;
 const rows = document.querySelectorAll("#topicsBody tr");
 const totalPages = Math.ceil(rows.length / rowsPerPage);
-console.log(rows.totalPages);
 const pagination = document.getElementById("pagination");
 
 function displayPage(page) {
