@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>閒聊討論區</title>
+  <link id="darkModeStylesheet" rel="stylesheet" href="{% static 'css/darkmode.css' %}" disabled>
+  <script src="{% static 'js/darkmode.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+</head>
+
+<body class="body">
+  <nav class="navBar">
+    <span id="userStatus"></span>
+    <!-- <button class="loginBtn" onclick="window.location.href = 'login.html';">登入</button> -->
+    <button class="button" onclick="window.location.href = 'posts/new/';">新增貼文</button>
+    <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button>
+  </nav>
+  
+  <div class="container">
+    <div class="categories">
+      <ul id="categoryList" style="margin: 0px;">
+      </ul>
+    </div>
+    <div class="boards" id="boardsContainer">
+    </div>
+  </div>
+  <script type="module" src="{% static 'js/index.js' %}"></script>
+  <script>
+    function goToCategory(index) {
+      event.preventDefault();
+      window.location.href = 'my_topics.html';
+    }
+
+    function createCategory(name, topics) {
+      return {
+        name: name,
+        topics: topics
+      };
+    }
+
+    function createTopic(subject, createdAt, user) {
+      return {
+        subject: subject,
+        createdAt: createdAt,
+        user: user
+      };
+    }
+
+    function formatDate(date) {
+      const d = new Date(date);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    function getRandomUser(users) {
+      return users[Math.floor(Math.random() * users.length)];
+    }
+
+    const categories = [];
+    const users = ['Alice', 'Bob', 'Charles', 'Dennis', 'Emily'];
+    for (let i = 0; i < 5; i++) {
+      const topics = [];
+      for (let j = 0; j < 5; j++) {
+        topics.push(createTopic(
+          `主題${j + 1}`,
+          formatDate(Date.now()),
+          getRandomUser(users)
+        ));
+      }
+      categories.push(createCategory(
+        `分類${String.fromCharCode(65 + i)}`,
+        topics
+      ));
+    }
+
+    const categoryList = document.getElementById('categoryList');
+    categories.forEach((category, index) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = './my_topics.html';
+      a.className = 'category';
+      a.textContent = category.name;
+      li.appendChild(a);
+      categoryList.appendChild(li);
+    });
+
+    const boardsContainer = document.getElementById('boardsContainer');
+    categories.forEach((category, index) => {
+      const boardDiv = document.createElement('div');
+      boardDiv.className = 'board';
+
+      const heading = document.createElement('h2');
+      heading.className = 'heading';
+      heading.textContent = category.name;
+      boardDiv.appendChild(heading);
+
+      const table = document.createElement('table');
+      table.className = 'table';
+
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      headerRow.className = 'tableHeader';
+      ['主題', '最後更新時間', '用戶'].forEach(text => {
+        const th = document.createElement('td');
+        th.textContent = text;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      category.topics.forEach(topic => {
+        const row = document.createElement('tr');
+        row.className = 'tableRows';
+
+        const subjectCell = document.createElement('td');
+        subjectCell.className = 'subject';
+        subjectCell.textContent = topic.subject; // Access the subject property
+        row.appendChild(subjectCell);
+
+        const lastUpdateCell = document.createElement('td');
+        lastUpdateCell.className = 'lastUpdate';
+        lastUpdateCell.textContent = topic.createdAt; // Access the createdAt property
+        row.appendChild(lastUpdateCell);
+
+        const usernameCell = document.createElement('td');
+        usernameCell.className = 'username';
+        usernameCell.textContent = topic.user; // Access the user property
+        row.appendChild(usernameCell);
+
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+
+      const tfoot = document.createElement('tfoot');
+      tfoot.className = "tableFooter";
+      const footerRow = document.createElement('tr');
+      const footerCell = document.createElement('td');
+      footerCell.className = 'seeAll';
+      footerCell.colSpan = 3;
+      const seeAllButton = document.createElement('button');
+      seeAllButton.className = 'seeAll';
+      seeAllButton.textContent = '全部';
+      seeAllButton.onclick = () => goToCategory(index);
+      footerCell.appendChild(seeAllButton);
+      footerRow.appendChild(footerCell);
+      tfoot.appendChild(footerRow);
+      table.appendChild(tfoot);
+
+      boardDiv.appendChild(table);
+      boardsContainer.appendChild(boardDiv);
+
+      if (index < categories.length - 1) {
+        const hr = document.createElement('hr');
+        boardsContainer.appendChild(hr);
+      }
+    });
+  </script>
+</body>
+
+<footer class="footer">
+  <p>Copyright© 2025 CSIE5210 Web程式設計與應用 113-2 Group 24. All rights reserved.</p>
+</footer>
+
+</html>
