@@ -55,7 +55,23 @@
 - 
 
 ## 組員分工情況 (共100%)，Group 24
-- 李浩銘 25% 實作Django
+- 李浩銘 25% 實作Django及Docker
 - 杜孟聰 25% 
 - 邱志偉 25% Report
-- 劉晧安 25% 
+- 劉晧安 25%
+
+## Docker
+### Docker Image Pull 連結
+https://hub.docker.com/r/ming119/web_team24
+
+### Docker啟動方式說明
+```bash
+# Run with 
+docker pull ming119/web_team24:latest
+docker run -p 8000:8000 ming119/web_team24:latest -d
+```
+
+```bash
+# build form source
+docker compose up -d
+```
