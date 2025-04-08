@@ -63,17 +63,16 @@ Now the web is hosted on localhost:8000
 - 產生框架
 - 安裝套件
 - 建立資料庫：SQLite3
-- 修改：Model, View, Template
-- 網址架構：Home, Register, Login, Logout
-- 調整Admin管理頁面
-- 使用者管理
+- Model, View, Template：把原來的網頁放入Django的框架
+- 網址架構：首頁、註冊、登入、登出、新增貼文、分類
+- 使用者管理：用戶註冊、登入、登出
 
 ## 額外找了與當週上課的主題相關的程式技術
 ### 資料庫
-- SQLite3
+- SQLite3：用戶管理、新增貼文
 
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% 實作Django及Docker
 - 杜孟聰 25% 不知道
-- 邱志偉 25% Report
+- 邱志偉 25% 撰寫報告
 - 劉晧安 25% 不知道
