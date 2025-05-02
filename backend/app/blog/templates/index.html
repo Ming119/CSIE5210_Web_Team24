@@ -30,6 +30,10 @@
 
     <!-- Posts Section (Right) -->
     <div class="col-md-9">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>貼文列表</h2>
+        <button id="newPostBtn" class="btn btn-primary">新增貼文</button>
+      </div>
       <div class="boards" id="boardsContainer">
         {% for post in posts %}
           <div class="card mb-3 shadow-sm">
@@ -37,7 +41,7 @@
               <h5 class="card-title">
                 <a href="#" class="text-decoration-none text-dark">{{ post.title }}</a>
               </h5>
-              <p class="card-text text-muted">作者: {{ post.author.username }} | 日期: {{ post.created_at|date:"Y-m-d" }}</p>
+              <p class="card-text text-muted">作者: {{ post.author.username }} | 日期: {{ post.created_at|date:"Y-m-d H:i:s" }}</p>
               <p class="card-text">{{ post.content|truncatewords:20 }}</p>
               {% if post.category %}
                 <span class="badge bg-primary">{{ post.category.name }}</span>
@@ -53,4 +57,134 @@
     </div>
   </div>
 </div>
+
+<!-- Modal for creating a new post -->
+<div id="newPostModal" class="modal" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新增貼文</h5>
+        <button type="button" class="btn-close" id="closeModalBtn"></button>
+      </div>
+      <div class="modal-body">
+        <form id="newPostForm">
+          <div class="mb-3">
+            <label for="postTitle" class="form-label">標題</label>
+            <input type="text" id="postTitle" name="title" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="postContent" class="form-label">內容</label>
+            <textarea id="postContent" name="content" class="form-control" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="postCategory" class="form-label">分類</label>
+            <select id="postCategory" name="category" class="form-select">
+              <option value="">未分類</option>
+              {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show the modal
+  document.getElementById("newPostBtn").addEventListener("click", function () {
+    document.getElementById("newPostModal").style.display = "block";
+  });
+
+  // Close the modal
+  document.getElementById("closeModalBtn").addEventListener("click", function () {
+    document.getElementById("newPostModal").style.display = "none";
+  });
+
+  // Fetch and render posts on page load
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("{% url 'get_posts' %}")
+      .then((response) => response.json())
+      .then((posts) => {
+        const boardsContainer = document.getElementById("boardsContainer");
+        boardsContainer.innerHTML = ""; // Clear existing posts
+
+        posts.forEach((post) => {
+          const newCard = document.createElement("div");
+          newCard.classList.add("card", "mb-3", "shadow-sm");
+          newCard.innerHTML = `
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="#" class="text-decoration-none text-dark">${post.title}</a>
+              </h5>
+              <p class="card-text text-muted">作者: ${post.author} | 日期: ${post.updated_at}</p>
+              <p class="card-text">${post.content}</p>
+              <span class="badge bg-primary">${post.category}</span>
+            </div>
+          `;
+          boardsContainer.appendChild(newCard);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+      });
+  });
+
+  // Handle form submission
+  document.getElementById("newPostForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById("postTitle").value;
+    const content = document.getElementById("postContent").value;
+    const category = document.getElementById("postCategory").value;
+
+    fetch("{% url 'create_post' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}",
+      },
+      body: JSON.stringify({ title, content, category }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+          // Close modal
+          document.getElementById("newPostModal").style.display = "none";
+
+          // Clear form
+          document.getElementById("newPostForm").reset();
+
+          // Add new post to the boards
+          const boardsContainer = document.getElementById("boardsContainer");
+          const newCard = document.createElement("div");
+          newCard.classList.add("card", "mb-3", "shadow-sm");
+          newCard.innerHTML = `
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="#" class="text-decoration-none text-dark">${data.post.title}</a>
+              </h5>
+              <p class="card-text text-muted">作者: ${data.post.author} | 日期: ${data.post.updated_at}</p>
+              <p class="card-text">${data.post.content}</p>
+              <span class="badge bg-primary">${data.post.category}</span>
+            </div>
+          `;
+          boardsContainer.prepend(newCard);
+        } else {
+          alert("發生錯誤，請重試！");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("發生錯誤，請重試！");
+      });
+  });
+</script>
 {% endblock %}

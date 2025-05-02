@@ -24,7 +24,6 @@
         <!-- <button class="darkModeContainer" id="darkModeToggle">🌙 夜間模式</button> -->
         {% if user.is_authenticated %}
           <span class="me-3">歡迎，{{ user.username }}!</span>
-          <a href="posts/new/" class="btn btn-primary me-2">新增貼文</button>
           <a href="{% url 'logout' %}" class="btn btn-outline-secondary">登出</a>
         {% else %}
           <a href="{% url 'login' %}" class="btn btn-outline-secondary">登入</a>

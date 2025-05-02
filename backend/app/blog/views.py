@@ -1,9 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from time import localtime
+
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Category, Post
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt  # Add this line
+
 from .forms import PostForm
+from .models import Category, Post
+
 
 def index_view(request):
   categories = Category.objects.all()
@@ -54,16 +60,47 @@ def logout_view(request):
   logout(request)
   return redirect('index')
 
+def get_posts(request):
+    posts = Post.objects.all().values("title", "updated_at", "author__username", "content", "category__name")
+    formatted_posts = [
+        {
+            "title": post["title"],
+            "updated_at": localtime(post["updated_at"]).strftime("%Y-%m-%d %H:%M:%S"),
+            "author": post["author__username"],
+            "content": post["content"],
+            "category": post["category__name"] or "未分類",
+        }
+        for post in posts
+    ]
+    return JsonResponse(list(posts), safe=False)
+
+import json
+
+
+@csrf_exempt
 @login_required
 def create_post(request):
-  if request.method == 'POST':
-    form = PostForm(request.POST)
-    if form.is_valid():
-      post = form.save(commit=False)
-      post.author = request.user  # Set the author to the current user
-      post.save()
-      return redirect('index')  # Redirect to the blog index page after saving
-  else:
-    form = PostForm()
-  
-  return render(request, 'create_post.html', {'form': form})
+    if request.method == "POST":
+        try:
+            # Parse JSON data
+            data = json.loads(request.body)
+            title = data.get("title")
+            content = data.get("content")
+            category_id = data.get("category")  # Get category ID
+            category = Category.objects.get(id=category_id) if category_id else None
+
+            # Create the post
+            post = Post.objects.create(title=title, content=content, author=request.user, category=category)
+            return JsonResponse({
+                "message": "Post created successfully",
+                "post": {
+                    "title": post.title,
+                    "content": post.content,
+                    "author": post.author.username,
+                    "category": post.category.name if post.category else "未分類",
+                    "updated_at": post.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                },
+            })
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    return JsonResponse({"error": "Invalid request method"}, status=405)
