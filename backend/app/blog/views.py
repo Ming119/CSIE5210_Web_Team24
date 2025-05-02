@@ -1,10 +1,9 @@
-from time import localtime
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt  # Add this line
 
 from .forms import PostForm
@@ -61,18 +60,18 @@ def logout_view(request):
   return redirect('index')
 
 def get_posts(request):
-    posts = Post.objects.all().values("title", "updated_at", "author__username", "content", "category__name")
+    posts = Post.objects.all()
     formatted_posts = [
         {
-            "title": post["title"],
-            "updated_at": localtime(post["updated_at"]).strftime("%Y-%m-%d %H:%M:%S"),
-            "author": post["author__username"],
-            "content": post["content"],
-            "category": post["category__name"] or "未分類",
+            "title": post.title,
+            "updated_at": localtime(post.updated_at).strftime("%Y-%m-%d %H:%M:%S"),
+            "author": post.author.username,
+            "content": post.content,
+            "category": post.category.name if post.category else "未分類",
         }
         for post in posts
     ]
-    return JsonResponse(list(posts), safe=False)
+    return JsonResponse(formatted_posts, safe=False)
 
 import json
 
