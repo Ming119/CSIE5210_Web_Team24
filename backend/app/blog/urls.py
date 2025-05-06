@@ -9,6 +9,6 @@ urlpatterns = [
   path('register/', views.register_view, name='register'),
   path('posts/new/', views.create_post, name='create_post'),
   # path('posts/<int:pk>/', views.post_detail, name='post_detail'),
-  path("api/posts/", views.get_posts, name="get_posts"),
+  path("posts/", views.get_posts, name="get_posts"),
   path("api/posts/", views.create_post, name="create_post"),
 ]

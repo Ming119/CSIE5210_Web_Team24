@@ -20,15 +20,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('accounts/login/', views.login_view, name='login'),
-    # path('accounts/logout/', views.logout_view, name='logout'),
-    # path('accounts/register/', views.register_view, name='register'),
-    # path('', include('blog.urls')),
-    path('', views.index_view, name='index'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('register/', views.register_view, name='register'),
-    path('posts/new/', views.create_post, name='create_post'),
-    path("api/posts/", views.get_posts, name="get_posts"),
-    
+    path('accounts/login/', views.login_view, name='login'),
+    path('accounts/logout/', views.logout_view, name='logout'),
+    path('accounts/register/', views.register_view, name='register'),
+    path('', include('blog.urls')),
 ]

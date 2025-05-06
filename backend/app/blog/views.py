@@ -60,16 +60,22 @@ def logout_view(request):
   return redirect('index')
 
 def get_posts(request):
-    posts = Post.objects.all()
+    category_slug = request.GET.get('category')
+
+    if category_slug:
+      posts = Post.objects.filter(category__slug=category_slug)
+    else:
+      posts = Post.objects.all()
+
     formatted_posts = [
-        {
-            "title": post.title,
-            "updated_at": localtime(post.updated_at).strftime("%Y-%m-%d %H:%M:%S"),
-            "author": post.author.username,
-            "content": post.content,
-            "category": post.category.name if post.category else "未分類",
-        }
-        for post in posts
+      {
+        "title": post.title,
+        "updated_at": localtime(post.updated_at).strftime("%Y-%m-%d %H:%M:%S"),
+        "author": post.author.username,
+        "content": post.content,
+        "category": post.category.name if post.category else "未分類",
+      }
+      for post in posts
     ]
     return JsonResponse(formatted_posts, safe=False)
 

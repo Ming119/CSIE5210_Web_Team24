@@ -16,11 +16,11 @@
         <div class="card-body p-0">
           <ul class="list-group list-group-flush" id="categoryList">
             <li class="list-group-item">
-              <a href="{% url 'index' %}" class="text-decoration-none">全部</a>
+              <a href="{% url 'index' %}" class="text-decoration-none category-link" data-category="">全部</a>
             </li>
             {% for category in categories %}
               <li class="list-group-item">
-                <a href="{% url 'index' %}?category={{ category.slug }}" class="text-decoration-none">{{ category.name }}</a>
+                <a href="{% url 'index' %}?category={{ category.slug }}" class="text-decoration-none category-link" data-category="{{ category.slug }}">{{ category.name }}</a>
               </li>
             {% endfor %}
           </ul>
@@ -93,98 +93,147 @@
 </div>
 
 <script>
-  // Show the modal
-  document.getElementById("newPostBtn").addEventListener("click", function () {
-    document.getElementById("newPostModal").style.display = "block";
-  });
+// Utility function to get query parameter
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
 
-  // Close the modal
-  document.getElementById("closeModalBtn").addEventListener("click", function () {
-    document.getElementById("newPostModal").style.display = "none";
-  });
+// Function to fetch and render posts
+function fetchPosts(categorySlug = "") {
+  const url = categorySlug
+    ? "{% url 'get_posts' %}?category=" + encodeURIComponent(categorySlug)
+    : "{% url 'get_posts' %}";
 
-  // Fetch and render posts on page load
-  document.addEventListener("DOMContentLoaded", function () {
-    fetch("{% url 'get_posts' %}")
-      .then((response) => response.json())
-      .then((posts) => {
-        const boardsContainer = document.getElementById("boardsContainer");
-        boardsContainer.innerHTML = ""; // Clear existing posts
+  fetch(url)
+    .then((response) => response.json())
+    .then((posts) => {
+      const boardsContainer = document.getElementById("boardsContainer");
+      boardsContainer.innerHTML = ""; // Clear existing posts
 
-        posts.forEach((post) => {
-          const newCard = document.createElement("div");
-          newCard.classList.add("card", "mb-3", "shadow-sm");
-          newCard.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">
-                <a href="#" class="text-decoration-none text-dark">${post.title}</a>
-              </h5>
-              <p class="card-text text-muted">作者: ${post.author} | 日期: ${post.updated_at}</p>
-              <p class="card-text">${post.content}</p>
-              <span class="badge bg-primary">${post.category}</span>
-            </div>
-          `;
-          boardsContainer.appendChild(newCard);
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching posts:", error);
+      if (posts.length === 0) {
+        boardsContainer.innerHTML = '<p class="text-muted">目前沒有貼文。</p>';
+        return;
+      }
+
+      posts.forEach((post) => {
+        const newCard = document.createElement("div");
+        newCard.classList.add("card", "mb-3", "shadow-sm");
+        newCard.innerHTML = `
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="#" class="text-decoration-none text-dark">${post.title}</a>
+            </h5>
+            <p class="card-text text-muted">作者: ${post.author} | 日期: ${post.updated_at}</p>
+            <p class="card-text">${post.content.substring(0, 100)}...</p>
+            <span class="badge ${post.category ? 'bg-primary' : 'bg-secondary'}">${post.category || '未分類'}</span>
+          </div>
+        `;
+        boardsContainer.appendChild(newCard);
       });
-  });
-
-  // Handle form submission
-  document.getElementById("newPostForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const category = document.getElementById("postCategory").value;
-
-    fetch("{% url 'create_post' %}", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": "{{ csrf_token }}",
-      },
-      body: JSON.stringify({ title, content, category }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.message) {
-          // Close modal
-          document.getElementById("newPostModal").style.display = "none";
+    .catch((error) => {
+      console.error("Error fetching posts:", error);
+      document.getElementById("boardsContainer").innerHTML = '<p class="text-muted">載入貼文失敗，請稍後再試。</p>';
+    });
+}
 
-          // Clear form
-          document.getElementById("newPostForm").reset();
-
-          // Add new post to the boards
-          const boardsContainer = document.getElementById("boardsContainer");
-          const newCard = document.createElement("div");
-          newCard.classList.add("card", "mb-3", "shadow-sm");
-          newCard.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">
-                <a href="#" class="text-decoration-none text-dark">${data.post.title}</a>
-              </h5>
-              <p class="card-text text-muted">作者: ${data.post.author} | 日期: ${data.post.updated_at}</p>
-              <p class="card-text">${data.post.content}</p>
-              <span class="badge bg-primary">${data.post.category}</span>
-            </div>
-          `;
-          boardsContainer.prepend(newCard);
-        } else {
-          alert("發生錯誤，請重試！");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("發生錯誤，請重試！");
-      });
+// Highlight active category
+function highlightActiveCategory(categorySlug) {
+  const categoryLinks = document.querySelectorAll(".category-link");
+  categoryLinks.forEach((link) => {
+    link.classList.remove("fw-bold", "text-primary");
+    if (link.getAttribute("data-category") === categorySlug) {
+      link.classList.add("fw-bold", "text-primary");
+    }
   });
+}
+
+// Show the modal
+document.getElementById("newPostBtn").addEventListener("click", function () {
+  document.getElementById("newPostModal").style.display = "block";
+});
+
+// Close the modal
+document.getElementById("closeModalBtn").addEventListener("click", function () {
+  document.getElementById("newPostModal").style.display = "none";
+});
+
+// Handle category filter clicks
+document.querySelectorAll(".category-link").forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const categorySlug = this.getAttribute("data-category");
+    
+    // Update URL without reloading
+    const newUrl = categorySlug
+      ? `${window.location.pathname}?category=${encodeURIComponent(categorySlug)}`
+      : window.location.pathname;
+    window.history.pushState({}, "", newUrl);
+
+    // Fetch posts for the selected category
+    fetchPosts(categorySlug);
+
+    // Highlight active category
+    highlightActiveCategory(categorySlug);
+  });
+});
+
+// Handle form submission
+document.getElementById("newPostForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const title = document.getElementById("postTitle").value;
+  const content = document.getElementById("postContent").value;
+  const category = document.getElementById("postCategory").value;
+
+  fetch("{% url 'create_post' %}", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": "{{ csrf_token }}",
+    },
+    body: JSON.stringify({ title, content, category }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.message) {
+        // Close modal
+        document.getElementById("newPostModal").style.display = "none";
+
+        // Clear form
+        document.getElementById("newPostForm").reset();
+
+        // Refresh posts (respecting current category filter)
+        const currentCategory = getQueryParam("category") || "";
+        fetchPosts(currentCategory);
+      } else {
+        alert("發生錯誤，請重試！");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("發生錯誤，請重試！");
+    });
+});
+
+// Fetch posts on page load (respecting URL category parameter)
+document.addEventListener("DOMContentLoaded", function () {
+  const currentCategory = getQueryParam("category") || "";
+  fetchPosts(currentCategory);
+  highlightActiveCategory(currentCategory);
+});
+
+// Handle browser back/forward navigation
+window.addEventListener("popstate", function () {
+  const currentCategory = getQueryParam("category") || "";
+  fetchPosts(currentCategory);
+  highlightActiveCategory(currentCategory);
+});
 </script>
 {% endblock %}
