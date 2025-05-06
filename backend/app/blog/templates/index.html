@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block head %}
+<style>
+  .card.clickable:hover {
+    cursor: pointer;
+    background-color: #f8f9fa;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -36,10 +42,10 @@
       </div>
       <div class="boards" id="boardsContainer">
         {% for post in posts %}
-          <div class="card mb-3 shadow-sm">
+          <div class="card mb-3 shadow-sm clickable" data-url="{% url 'post_detail' post.id %}">
             <div class="card-body">
               <h5 class="card-title">
-                <a href="#" class="text-decoration-none text-dark">{{ post.title }}</a>
+                <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark">{{ post.title }}</a>
               </h5>
               <p class="card-text text-muted">作者: {{ post.author.username }} | 日期: {{ post.created_at|date:"Y-m-d H:i:s" }}</p>
               <p class="card-text">{{ post.content|truncatewords:20 }}</p>
@@ -118,11 +124,12 @@ function fetchPosts(categorySlug = "") {
 
       posts.forEach((post) => {
         const newCard = document.createElement("div");
-        newCard.classList.add("card", "mb-3", "shadow-sm");
+        newCard.classList.add("card", "mb-3", "shadow-sm", "clickable");
+        newCard.setAttribute("data-url", `/post/${post.id}/`); // Adjust URL pattern as needed
         newCard.innerHTML = `
           <div class="card-body">
             <h5 class="card-title">
-              <a href="#" class="text-decoration-none text-dark">${post.title}</a>
+              <a href="/post/${post.id}/" class="text-decoration-none text-dark">${post.title}</a>
             </h5>
             <p class="card-text text-muted">作者: ${post.author} | 日期: ${post.updated_at}</p>
             <p class="card-text">${post.content.substring(0, 100)}...</p>
@@ -130,6 +137,16 @@ function fetchPosts(categorySlug = "") {
           </div>
         `;
         boardsContainer.appendChild(newCard);
+      });
+
+      // Add click event listeners to clickable cards
+      document.querySelectorAll(".card.clickable").forEach((card) => {
+        card.addEventListener("click", function (e) {
+          // Prevent navigation if clicking on interactive elements (e.g., buttons)
+          if (e.target.tagName !== "A" && e.target.tagName !== "BUTTON" && !e.target.closest("a, button")) {
+            window.location.href = this.getAttribute("data-url");
+          }
+        });
       });
     })
     .catch((error) => {
@@ -227,6 +244,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentCategory = getQueryParam("category") || "";
   fetchPosts(currentCategory);
   highlightActiveCategory(currentCategory);
+
+  // Add click event listeners to initial cards
+  document.querySelectorAll(".card.clickable").forEach((card) => {
+    card.addEventListener("click", function (e) {
+      if (e.target.tagName !== "A" && e.target.tagName !== "BUTTON" && !e.target.closest("a, button")) {
+        window.location.href = this.getAttribute("data-url");
+      }
+    });
+  });
 });
 
 // Handle browser back/forward navigation

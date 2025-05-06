@@ -6,9 +6,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt  # Add this line
 
+import json
 from .forms import PostForm
 from .models import Category, Post
-
 
 def index_view(request):
   categories = Category.objects.all()
@@ -69,6 +69,7 @@ def get_posts(request):
 
     formatted_posts = [
       {
+        "id": post.id,
         "title": post.title,
         "updated_at": localtime(post.updated_at).strftime("%Y-%m-%d %H:%M:%S"),
         "author": post.author.username,
@@ -79,33 +80,37 @@ def get_posts(request):
     ]
     return JsonResponse(formatted_posts, safe=False)
 
-import json
-
+def post_detail(request, pk):
+  post = get_object_or_404(Post, pk=pk)
+  return render(request, 'post_detail.html', {'post': post})
 
 @csrf_exempt
 @login_required
 def create_post(request):
-    if request.method == "POST":
-        try:
-            # Parse JSON data
-            data = json.loads(request.body)
-            title = data.get("title")
-            content = data.get("content")
-            category_id = data.get("category")  # Get category ID
-            category = Category.objects.get(id=category_id) if category_id else None
+  if request.method == "POST":
+    try:
+      # Parse JSON data
+      data = json.loads(request.body)
 
-            # Create the post
-            post = Post.objects.create(title=title, content=content, author=request.user, category=category)
-            return JsonResponse({
-                "message": "Post created successfully",
-                "post": {
-                    "title": post.title,
-                    "content": post.content,
-                    "author": post.author.username,
-                    "category": post.category.name if post.category else "未分類",
-                    "updated_at": post.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
-                },
-            })
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
-    return JsonResponse({"error": "Invalid request method"}, status=405)
+      # Create the post
+      post = Post.objects.create(
+        title=data.get("title"),
+        content=data.get("content"),
+        author=request.user,
+        category=Category.objects.get(id=data['category']) if data['category'] else None
+      )
+
+      return JsonResponse({
+          "message": "Post created successfully",
+          "post": {
+              "id": post.id,
+              "title": post.title,
+              "content": post.content,
+              "author": post.author.username,
+              "category": post.category.name if post.category else "未分類",
+              "updated_at": post.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+          },
+      })
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=400)
+  return JsonResponse({"error": "Invalid request method"}, status=405)

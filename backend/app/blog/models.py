@@ -14,6 +14,7 @@ class Category(models.Model):
     verbose_name_plural = "Categories"
 
 class Post(models.Model):
+  id = models.AutoField(primary_key=True)
   title = models.CharField(max_length=200)
   content = models.TextField()
   author = models.ForeignKey(User, on_delete=models.CASCADE)

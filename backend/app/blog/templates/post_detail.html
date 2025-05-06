@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title">{{ post.title }}</h2>
+      <p class="card-text text-muted">作者: {{ post.author.username }} | 日期: {{ post.created_at|date:"Y-m-d H:i:s" }}</p>
+      {% if post.category %}
+        <span class="badge bg-primary">{{ post.category.name }}</span>
+      {% else %}
+        <span class="badge bg-secondary">未分類</span>
+      {% endif %}
+      <hr>
+      <p class="card-text">{{ post.content }}</p>
+      <a href="{% url 'index' %}" class="btn btn-primary mt-3">返回列表</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

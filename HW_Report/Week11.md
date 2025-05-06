@@ -31,12 +31,20 @@
 # Week11 Report
 
 ## 練習了哪些當週上課的主題
+### Admin Page
+- 通過`python3 manage.py createsuperuser`創建管理員帳號。
+- 使用`/admin`進入管理頁面。
+
 ### AJAX
 - 按"新增貼文"後彈出視窗填寫內容。
 - 按"提交"後會即時更新貼文畫面。
 
+### 網址派發
+- 使用`request.GET.get('category')`獲取URL中的category參數。
+- 通過`post/<int:pk>`獲取URL中的pk參數。
+
 ## 組員分工情況 (共100%)，Group 24
-- 李浩銘 25% Admin Page
+- 李浩銘 25% Admin Page, 網址派發
 - 杜孟聰 25% 不知道
 - 邱志偉 25% AJAX for Posting, Report
 - 劉晧安 25% 不知道
