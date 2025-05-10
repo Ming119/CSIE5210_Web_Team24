@@ -1,0 +1,26 @@
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Default link color in dark mode */
+.dark-mode a {
+    color: #1e90ff; /* Light blue for readability */
+    text-decoration: none;
+}
+
+/* Hover effect for better user experience */
+.dark-mode a:hover {
+    color: #87cefa; /* Lighter blue on hover */
+    text-decoration: underline;
+}
+
+/* Visited links */
+.dark-mode a:visited {
+    color: #bb86fc; /* Soft purple to distinguish visited links */
+}
+
+/* Active (when clicking) */
+.dark-mode a:active {
+    color: #ffcc00; /* Yellow for temporary interaction feedback */
+}
