@@ -32,10 +32,11 @@
 
 ## 練習了哪些當週上課的主題
 ### 串接LLM
-- 
+- 使用Gemini作為網站的客服
+- 在首頁右上角啟動Gemini對話視窗
 
 ### JSON Web Token (JWT)
-- 
+- 在登入時使用JWT
 
 ### Django Rest Framework (DRF)
 - 
@@ -43,5 +44,5 @@
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% 
 - 杜孟聰 25% 
-- 邱志偉 25% Report
+- 邱志偉 25% Connecting Gemini LLM, Implement JWT with Login, Report
 - 劉晧安 25% 

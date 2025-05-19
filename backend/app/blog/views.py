@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import localtime
-from django.views.decorators.csrf import csrf_exempt  # Add this line
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .forms import PostForm
 from .models import Category, Post
