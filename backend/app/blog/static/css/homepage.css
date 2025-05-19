@@ -175,3 +175,19 @@ button:hover {
 .dark-mode button:hover {
     background-color: #223395;
 }
+
+/* Chat Icon Hover */
+#chatIcon:hover {
+  filter: brightness(1.2);
+  transform: scale(1.08);
+}
+
+/* Chat Dialog (dark mode support if needed) */
+.dark-mode #chatDialog {
+  background: #222;
+  color: #f0f0f0;
+}
+.dark-mode #chatDialog input {
+  background: #333;
+  color: #f0f0f0;
+}

@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -6,9 +8,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt  # Add this line
 
-import json
 from .forms import PostForm
 from .models import Category, Post
+
 
 def index_view(request):
   categories = Category.objects.all()
@@ -114,3 +116,6 @@ def create_post(request):
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=400)
   return JsonResponse({"error": "Invalid request method"}, status=405)
+
+def chat_view(request):
+    return render(request, 'chat.html')
