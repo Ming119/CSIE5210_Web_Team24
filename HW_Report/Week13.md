@@ -34,6 +34,10 @@
 ### 串接LLM
 - 使用Gemini作為網站的客服
 - 在首頁右上角啟動Gemini對話視窗
+- 到/backend/app/
+  - 執行"python3 manage.py runserver"
+- 到/backend/app/app/
+  - 執行"python3 socketio_server.py"
 
 ### JSON Web Token (JWT)
 - 在登入時使用JWT
