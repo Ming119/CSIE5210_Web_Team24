@@ -37,12 +37,14 @@
 
 ### JSON Web Token (JWT)
 - 在登入時使用JWT
+- http://localhost:8000/api/token/
 
 ### Django Rest Framework (DRF)
-- 
+- 實裝DRF來管理貼文
+- http://localhost:8000/api/posts/
 
 ## 組員分工情況 (共100%)，Group 24
 - 李浩銘 25% 
 - 杜孟聰 25% 
-- 邱志偉 25% Connecting Gemini LLM, Implement JWT with Login, Report
+- 邱志偉 25% Connecting Gemini LLM, Implement JWT with Login, Implement the DRF with Post, Report
 - 劉晧安 25% 
