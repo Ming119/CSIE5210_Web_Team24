@@ -118,6 +118,58 @@ def create_post(request):
         return JsonResponse({"error": str(e)}, status=400)
   return JsonResponse({"error": "Invalid request method"}, status=405)
 
+@login_required
+def my_posts(request):
+  posts = Post.objects.filter(author=request.user)
+  formatted_posts = [
+    {
+        "id": post.id,
+        "title": post.title,
+        "updated_at": localtime(post.updated_at).strftime("%Y-%m-%d %H:%M:%S"),
+        "author": post.author.username,
+        "content": post.content,
+        "category": post.category.name if post.category else "未分類",
+    }
+    for post in posts
+  ]
+
+  return render(request, 'my_posts.html', {'posts': formatted_posts})
+
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    
+    # 確保只有文章作者可以修改
+    if post.author != request.user:
+        return JsonResponse({"error": "You are not authorized to edit this post"}, status=403)
+    
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            post.title = data.get("title", post.title)
+            post.content = data.get("content", post.content)
+            post.category = Category.objects.get(id=data['category']) if data.get('category') else post.category
+            post.save()
+            return JsonResponse({
+                "message": "Post updated successfully",
+                "post": {
+                    "id": post.id,
+                    "title": post.title,
+                    "content": post.content,
+                    "author": post.author.username,
+                    "category": post.category.name if post.category else "未分類",
+                    "updated_at": localtime(post.updated_at).strftime("%Y-%m-%d %H:%M:%S"),
+                },
+            })
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    else:
+        # GET 請求時渲染編輯頁面
+        categories = Category.objects.all()
+        return render(request, 'edit_post.html', {'post': post, 'categories': categories})
+
+
+
+
 def chat_view(request):
     return render(request, 'chat.html')
 

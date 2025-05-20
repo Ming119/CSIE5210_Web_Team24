@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<h1>編輯文章</h1>
+<form id="edit-post-form">
+  <input type="text" id="title" value="{{ post.title }}" required>
+  <textarea id="content" required>{{ post.content }}</textarea>
+  <select id="category">
+    <option value="">未分類</option>
+    {% for category in categories %}
+    <option value="{{ category.id }}" {% if category.id == post.category.id %}selected{% endif %}>{{ category.name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">保存</button>
+</form>
+
+<script>
+  document.getElementById('edit-post-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = {
+      title: document.getElementById('title').value,
+      content: document.getElementById('content').value,
+      category: document.getElementById('category').value
+    };
+    fetch(`/post/{{ post.id }}/edit/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          alert(data.message);
+          window.location.href = `/post/${data.post.id}/`;
+        }
+      });
+  });
+</script>
+{% endblock %}
